@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numbers</title>
+    <meta name="description" content="Implement a function to check if a given positive integer is a prime number.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="column column-60 column-offset-20">
+                <div class="d-flex mh-100vh flex-column align-items-center justify-content-center">
+                    <div class="box light d-flex flex-column align-items-center justify-content-center gap-4 p-5 rounded shadow">
+                        <div class="text-center">
+                            <!-- <label for="input-number">Typea positive integer </label> -->
+                            <input class="text-center bg-white" type="text" placeholder="Type a positive integer" id="input-number">
+                            <button class="button" id="check-btn">Check Prime Number</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function isPrime(value) {
+
+            let number = parseInt(value);
+
+            // Sieve of Eratosthenes algorithm is used to efficiently identify prime numbers
+
+            if (number < 2) {
+                return false;
+            }
+
+            // Create an array of boolean values indicating whether each number is prime
+            const primes = new Array(number + 1).fill(true);
+
+            primes[0] = false; // 0 is not prime
+            primes[1] = false; // 1 is not prime
+
+            // Mark multiples of each number as non-prime
+            for (let i = 2; i <= Math.sqrt(number); i++) {
+                if (primes[i]) {
+                    /*
+                        loop starts from i * i because any smaller multiple of i (less than i * i)
+                        would have already been marked as non-prime by a smaller prime number. loop
+                        continues as long as the value of j (the current multiple) is less than or
+                        equal to the given number. loop increments the value of j by i in each iteration
+                        to move to the next multiple of the prime number i.
+                    */
+                    for (let j = i * i; j <= number; j += i) {
+                        primes[j] = false;
+                    }
+                }
+            }
+
+            return primes[number];
+        }
+
+        document.getElementById("check-btn").addEventListener("click", function () {
+            let number = document.getElementById("input-number").value;
+
+            if(!!number) {
+                if (isPrime(number)) {
+                    alert(`"${number}" is a prime number`)
+                } else {
+                    alert(`"${number}" is not a prime number`)
+                }
+            }
+
+        });
+    </script>
+</body>
+</html>

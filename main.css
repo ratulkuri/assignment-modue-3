@@ -118,6 +118,10 @@ body {
     color: #ff7f50;
 }
 
+.bg-white {
+    background-color: #fff !important;
+}
+
 .fw-700 {
     font-weight: 700;
 }
