@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Object</title>
+    <meta name="description" content="Implement a function to display the square root of the sum of squares for an array of numbers.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="column column-60 column-offset-20">
+                <div class="d-flex mh-100vh flex-column align-items-center justify-content-center">
+                    <div class="box light d-flex flex-column align-items-center justify-content-center gap-4 p-5 rounded shadow">
+                        <div>
+                            <h4 class="text-center"><u>The Array of Numbers</u></h4>
+                            <h4 class="text-center c-red">
+                                <strong id="array-of-numbers"></strong>
+                            </h4>
+                        </div>
+                        <div>
+                            <h4 class="text-center"><u>Calculation</u></h4>
+                            <h4 class="text-center"><strong>Square Root Of The Sum Of Squares Of All The Numbers</strong></h4>
+                            <h4 class="text-center"><span id="result" class="c-green fw-700 fs-lg">60</span> </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function calculateSquareRootOfSumOfSquares (array) {
+            // check if datatype of "array" parameter is Array;
+            if(!Array.isArray(array)) {
+                console.error(`Expected Array of Numbers. Recieved ${typeof array}: ${array}`);
+                return false;
+            }
+
+            // check if "array" parameter conatains Array of valid Number;
+            if(!array.every((element) => typeof element === 'number')) {
+                console.error(`"${array}" contains invalid datatype`);
+                return false;
+            }
+
+            // define sum variable and set initial value;
+            let sumOfSquareOfNumbers = 0;
+
+            array.forEach(number => {
+                 // Calculates square of the number
+                let squareOfNumber = Math.pow(number, 2);
+                // sums the values
+                sumOfSquareOfNumbers = sumOfSquareOfNumbers + squareOfNumber;
+            })
+
+            console.log("Sum Of Square Of Numbers =>", sumOfSquareOfNumbers);
+
+            // Calculate Square Root Of Sum Of Squares
+            let squareRootOfSum = Math.sqrt(sumOfSquareOfNumbers);
+
+            return squareRootOfSum
+        }
+
+        // define an array of numbers
+        let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+        // display the array of numbers
+        document.getElementById("array-of-numbers").innerText = `[${numbers}]`;
+
+        // display the square root of the sum of squares of all the numbers
+        document.getElementById("result").innerText = calculateSquareRootOfSumOfSquares(numbers);
+
+    </script>
+
+</body>
+</html>

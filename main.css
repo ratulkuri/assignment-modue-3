@@ -105,3 +105,23 @@ body {
     color: var(--text-dark);
     border: 1px solid var(--border-grey);
 }
+
+.c-red {
+    color: #f44336;
+}
+
+.c-green {
+    color: forestgreen;
+}
+
+.c-orange {
+    color: #ff7f50;
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+.fs-lg {
+    font-size: 3rem;
+}
