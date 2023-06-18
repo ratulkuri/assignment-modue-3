@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Object</title>
+    <meta name="description" content="Implement a function to display the day of the week for the current date.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="column column-60 column-offset-20">
+                <div class="d-flex mh-100vh flex-column align-items-center justify-content-center">
+                    <div class="box light d-flex flex-column align-items-center justify-content-center gap-4 p-5 rounded shadow">
+                        <div>
+                            <h4 class="text-center"><u>Todays Date</u></h4>
+                            <h4 class="text-center">
+                                <strong id="current-date"></strong>
+                            </h4>
+                        </div>
+                        <div>
+                            <h4 class="text-center"><u>Todays Day of The Week</u></h4>
+                            <h4 class="text-center">
+                                <strong id="day-of-week">asdasd</strong>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getDayOfTheWeekFromDate(date) {
+            const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+            let parsedDate = new Date(date);
+            let dayOfTheWeek = weekdays[parsedDate.getDay()];
+
+            return dayOfTheWeek
+        }
+
+
+        let currentDateObj = new Date();
+
+        let currentYear = currentDateObj.getFullYear(); // YYYY
+        // The months in JavaScript are zero indexed, so January is 0 and December is 11.
+        let currentMonth = ((currentDateObj.getMonth() + 1) < 10) ? `0${currentDateObj.getMonth() + 1}` : (currentDateObj.getMonth() + 1); // MM (two digit)
+        let currentDate = (currentDateObj.getDate() < 10) ? `0${currentDateObj.getDate()}` : currentDateObj.getDate(); // DD (two digit)
+
+        let currentDateFormated = `${currentYear}-${currentMonth}-${currentDate}`; // YYYY-MM-DD
+        let currentDayOfTheWeek = getDayOfTheWeekFromDate(currentDateFormated);
+
+        document.getElementById("current-date").innerText = currentDateFormated;
+        document.getElementById("day-of-week").innerText = currentDayOfTheWeek;
+
+    </script>
+
+</body>
+</html>

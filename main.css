@@ -1,0 +1,107 @@
+:root {
+    --bg-light: #e8eaf6;
+    --bg-dark: #3f51b5;
+    --text-light: #fff;
+    --text-dark: #606c76;
+    --border-dark: #606c76;
+    --border-grey: #d2d2d2;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.h-100vh {
+    height: 100vh;
+}
+
+.mh-100vh {
+    min-height: 100vh;
+}
+
+.gap-1 {
+    gap: 1rem;
+}
+
+.gap-2 {
+    gap: 2rem;
+}
+
+.gap-3 {
+    gap: 3rem;
+}
+
+.gap-4 {
+    gap: 4rem;
+}
+
+.gap-5 {
+    gap: 5rem;
+}
+
+.p-1 {
+    padding: 1rem;
+}
+
+.p-2 {
+    padding: 2rem;
+}
+
+.p-3 {
+    padding: 3rem;
+}
+
+.p-4 {
+    padding: 4rem;
+}
+
+.p-5 {
+    padding: 5rem;
+}
+
+.rounded {
+    border-radius: 1rem;
+}
+
+.shadow {
+    box-shadow: 0px 6px 16px rgb(0 0 0 / 20%);
+}
+
+.box.light {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    border: 1px solid var(--border-grey);
+}
