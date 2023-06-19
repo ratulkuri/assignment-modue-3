@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Query Selector</title>
+    <meta name="description" content="Implement a JavaScript function that selects all paragraphs with a specific class and changes their text color to red.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="column column-60 column-offset-20">
+                <div class="d-flex mh-100vh flex-column align-items-center justify-content-center">
+                    <div class="box light d-flex flex-column align-items-center justify-content-center gap-4 p-5 rounded shadow">
+                        <p id="paragraph-1" class="text-item item-1">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque enim quae voluptatibus
+                            numquam modi quam.
+                        </p>
+                        <p id="paragraph-2" class="text-item item-2">
+                            Voluptatem vero quibusdam repudiandae earum. Aliquam illum minima quia
+                            architecto repudiandae cum omnis id quae.
+                        </p>
+                        <p id="paragraph-3" class="text-item item-3 fw-700">
+                            Doloremque enim quae voluptatibus numquam modi quam. Voluptatem vero quibusdam repudiandae earum.
+                        </p>
+                        <p id="paragraph-4" class="text-item item-4">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque enim quae voluptatibus
+                            numquam modi quam. Voluptatem vero quibusdam repudiandae earum. Aliquam illum minima quia
+                            architecto repudiandae cum omnis id quae.
+                        </p>
+                        <button class="button" onclick="changeColor()">Change Color</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function changeColor () {
+            let paragraphs = document.querySelectorAll(".text-item");
+            if (paragraphs.length > 0) {
+                paragraphs.forEach((item) => {
+                    item.style.color = "red";
+                })
+            }
+        }
+    </script>
+</body>
+</html>
