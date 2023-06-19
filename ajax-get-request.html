@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Get Request</title>
+    <meta name="description" content="Implement a JavaScript function that sends an AJAX GET request to the following URL: 'https://api.example.com/data'.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="column column-60 column-offset-20">
+                <div class="d-flex mh-100vh flex-column align-items-center justify-content-center">
+                    <div class="box light d-flex flex-column align-items-center justify-content-center gap-4 p-5 rounded shadow">
+                        <h4 id="message" class="c-red fw-700 mb-0">AJAX Get Request</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+
+        // Define function for ajax get request
+        const getData = async () => {
+            // const URL = "https://jsonplaceholder.typicode.com/posts"; // response: success
+            const URL = "https://api.example.com/data"; // response: error
+
+            try {
+                const response = await axios.get(URL);
+
+                if (response.status === 200) {
+                    console.log(response.data)
+                    document.getElementById("message").textContent = `Found ${response.data.length} item`;
+                } else {
+                    console.log(response)
+                    document.getElementById("message").textContent = `${response.status} | ${response.statusText}`;
+                }
+            } catch (error) {
+                console.error(error.message)
+                document.getElementById("message").textContent = error.message;
+            }
+
+        }
+
+        // Call/Initialize function
+        getData();
+
+    </script>
+
+</body>
+</html>
