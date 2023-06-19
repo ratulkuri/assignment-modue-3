@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Common Events</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="column column-60 column-offset-20">
+                <div class="d-flex mh-100vh flex-column align-items-center justify-content-center">
+                    <div class="box light d-flex flex-column align-items-center justify-content-center gap-4 p-1 rounded shadow">
+                        <div class="text-center">
+                            <img id="photo" class="d-block mb-0" src="https://picsum.photos/id/175/320/200" alt="lorem picsum">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("click", function (event) {
+            alert(`Clicked at coordinates (x, y): (${event.clientX}, ${event.clientY})`);
+        })
+
+        document.getElementById("photo").addEventListener("mouseover", function (event) {
+            event.target.src = "https://picsum.photos/id/180/320/200";
+        })
+
+        document.addEventListener("keydown", function (event) {
+            alert(`you have pressed the key "${event.key}". The key code for this key is ${event.keyCode}`);
+        })
+    </script>
+
+</body>
