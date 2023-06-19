@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulate CSS Class</title>
+    <meta name="description" content="Implement a JavaScript function that adds a CSS class named 'highlight' to the paragraph element when the button is clicked.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="column column-60 column-offset-20">
+                <div class="d-flex mh-100vh flex-column align-items-center justify-content-center">
+                    <div class="box light d-flex flex-column align-items-center justify-content-center gap-4 p-5 rounded shadow">
+                        <div class="text-center">
+                            <p id="paragraph">This is initial text conent of the paragraph element.</p>
+                            <button class="button" onclick="highlightText()">Click Me</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function highlightText () {
+            document.getElementById("paragraph").classList.add("highlight");
+        }
+    </script>
+</body>
+</html>
