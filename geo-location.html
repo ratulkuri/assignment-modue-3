@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo Location</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <div id="map" class="w-100 h-100vh"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        function showMap(latitude, longitude) {
+            // Initialize the map
+            var map = L.map('map').setView([latitude, longitude], 13);
+
+            // Add a tile layer (map tiles)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+              maxZoom: 18,
+            }).addTo(map);
+
+            // Add a marker to the map
+            L.marker([latitude, longitude]).addTo(map)
+              .bindPopup(`You are here! &#128512; <br> <br> Latitude: ${latitude} <br> Longitude: ${longitude}`)
+              .openPopup();
+        }
+
+
+        function getCurrentLocation() {
+            if (navigator.geolocation) {
+
+                const options = {
+                    enableHighAccuracy: true
+                }
+
+                // Geolocation supported
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+
+                        console.log("latitude", latitude);
+                        console.log("longitude", longitude);
+
+                        showMap(latitude, longitude);
+                    },
+                    error => {
+                        console.error(`Error occurred: ${error.message}`);
+                    },
+                    options
+                );
+            } else {
+                console.error('Geolocation is not supported by this browser.');
+            }
+        }
+
+        // Example usage
+        getCurrentLocation();
+
+      </script>
+
+</body>
+</html>
