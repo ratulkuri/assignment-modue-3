@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigator Object</title>
+    <meta name="description" content="Implement a function to display the user's browser name and version.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="column column-60 column-offset-20">
+                <div class="d-flex mh-100vh flex-column align-items-center justify-content-center">
+                    <div class="box light d-flex flex-column align-items-center justify-content-center gap-4 p-5 rounded shadow">
+                        <div>
+                            <h4 class="text-center"><u>Browser Information</u></h4>
+                            <h5 class="text-center mb-0"><strong>Name: </strong> <span id="browser-name"></span></h5>
+                            <h5 class="text-center mb-0"><strong>Version: </strong> <span id="browser-version"></span></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getBrowserInfo() {
+            const browser = {};
+
+            // Detect Chrome
+            if (navigator.userAgent.includes('Chrome') && !navigator.userAgent.includes('Edg') && !navigator.userAgent.includes('OPR')) {
+                browser.name = 'Chrome';
+                browser.version = /Chrome\/([\d.]+)/.exec(navigator.userAgent)[1];
+            }
+            // Detect Firefox
+            else if (navigator.userAgent.includes('Firefox')) {
+                browser.name = 'Firefox';
+                browser.version = /Firefox\/([\d.]+)/.exec(navigator.userAgent)[1];
+            }
+            // Detect Safari
+            else if (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Edg') && !navigator.userAgent.includes('OPR')) {
+                browser.name = 'Safari';
+                browser.version = /Safari\/([\d.]+)/.exec(navigator.userAgent)[1];
+            }
+            // Detect Microsoft Edge
+            else if (navigator.userAgent.includes('Edg')) {
+                browser.name = 'Microsoft Edge';
+                browser.version = /Edg\/([\d.]+)/.exec(navigator.userAgent)[1];
+            }
+            // Detect Opera
+            else if (navigator.userAgent.includes('OPR')) {
+                browser.name = 'Opera';
+                browser.version = /OPR\/([\d.]+)/.exec(navigator.userAgent)[1];
+            }
+            // Default to displaying the userAgent string
+            else {
+                browser.name = 'Unknown';
+                browser.version = 'N/A';
+            }
+
+            return browser;
+        }
+
+        // Example usage
+        const browserInfo = getBrowserInfo();
+        console.log(`Browser Name: ${browserInfo.name}`);
+        console.log(`Browser Version: ${browserInfo.version}`);
+
+
+        document.getElementById("browser-name").innerText = browserInfo.name;
+        document.getElementById("browser-version").innerText = browserInfo.version;
+    </script>
+</body>
+</html>
