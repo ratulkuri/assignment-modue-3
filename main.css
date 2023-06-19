@@ -162,3 +162,8 @@ body {
 .highlight {
     background-color: yellow;
 }
+
+.feedback {
+    font-size: 14px;
+    margin-top: 5px;
+}

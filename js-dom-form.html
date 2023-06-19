@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS DOM Working with Form Input</title>
+    <meta name="description" content="Implement JavaScript validation for the form fields.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="column column-60 column-offset-20">
+                <div class="d-flex mh-100vh flex-column align-items-center justify-content-center">
+                    <div class="box light d-flex flex-column align-items-center justify-content-center gap-4 p-5 rounded shadow">
+                        <h3 class="text-center fw-700 mb-0">Form Validation</h3>
+                        <form id="form" class="mb-0">
+                            <fieldset>
+                                <label for="name">Name</label>
+                                <input class="validate bg-white mb-0" name="name" type="text" placeholder="Example: John Doe" id="name">
+                                <div class="feedback name fw-700 c-red mb-2"></div>
+
+                                <label for="email">Email</label>
+                                <input class="validate bg-white mb-0" name="email" type="email" placeholder="Example: john@example.com" id="email">
+                                <div class="feedback email fw-700 c-red mb-2"></div>
+
+                                <label for="password">Password</label>
+                                <div class="mb-1"><small>Hint: Password requires 8 characters with at least 1 uppercase, 1 lowercase, and 1 digit.</small></div>
+                                <input class="validate bg-white mb-0" name="password" type="password" id="password">
+                                <div class="feedback password fw-700 c-red mb-2"></div>
+
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input class="validate bg-white mb-0" name="confirmPassword" type="password" id="confirmPassword">
+                                <div class="feedback confirmPassword fw-700 c-red mb-2"></div>
+
+                            </fieldset>
+
+                            <div class="text-center">
+                                <button class="button" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // Define validation feedback function
+        function validationFeedback(validated) {
+            if(!validated.isValid) {
+                validated.target.nextElementSibling.textContent = validated.errors.toString();
+                validated.target.style.borderColor = "red";
+                hasError = true;
+            } else {
+                validated.target.nextElementSibling.textContent = "";
+                validated.target.style.borderColor = "#d1d1d1";
+            }
+        }
+
+        // Define Password validation function
+        function validatePassword(passwordElm) {
+            let password = passwordElm.value;
+            let errorMessage = [];
+
+            // Validate lowercase letters
+            var lowerCaseLetters = /[a-z]/g;
+            if(!password.match(lowerCaseLetters)) {
+                errorMessage.push("requires at least 1 lowercase character");
+            }
+
+            // Validate capital letters
+            var upperCaseLetters = /[A-Z]/g;
+            if(!password.match(upperCaseLetters)){
+                errorMessage.push("requires at least 1 uppercase character");
+            }
+
+            // Validate numbers
+            var numbers = /[0-9]/g;
+            if(!password.match(numbers)){
+                errorMessage.push("requires at least 1 digit");
+            }
+
+            // Validate length
+            if(password.length < 8) {
+                errorMessage.push("requires minimum 8 characters");
+            }
+
+            if (errorMessage.length === 0) {
+                return {
+                    target: passwordElm,
+                    isValid: true,
+                    errors: null
+                }
+            }
+
+            return {
+                target: passwordElm,
+                isValid: false,
+                errors: errorMessage
+            }
+
+        }
+
+        // Define Name validation function
+        function validateName(nameElm) {
+            const nameRegex = /^[a-zA-Z\s]+$/;
+            let errorMessage = [];
+
+            if(nameElm.value.length > 0) {
+                if (!nameRegex.test(nameElm.value)) {
+                    errorMessage.push("Invalid name. Name should contain only letters.");
+                }
+            } else {
+                errorMessage.push("Name is required.");
+            }
+
+            if (errorMessage.length === 0) {
+                return {
+                    target: nameElm,
+                    isValid: true,
+                    errors: null
+                }
+            }
+
+            return {
+                target: nameElm,
+                isValid: false,
+                errors: errorMessage
+            }
+        }
+
+        // Define Email validation function
+        function validateEmail(emailElm) {
+            const emailRegex = /^\w+([.-]?\w+)*\+?\w*@\w+([.-]?\w+)*(\.\w{2,6})+$/;
+            let errorMessage = [];
+
+            if(emailElm.value.length > 0) {
+                if (!emailRegex.test(emailElm.value)) {
+                    errorMessage.push("Invalid email address.");
+                }
+            } else {
+                errorMessage.push("Email address is required.");
+            }
+
+            if (errorMessage.length === 0) {
+                return {
+                    target: emailElm,
+                    isValid: true,
+                    errors: null
+                }
+            }
+
+            return {
+                target: emailElm,
+                isValid: false,
+                errors: errorMessage
+            }
+        }
+
+        // Define Confirm Password validation function
+        function validateConfirmPassword(passElm, conPassElm) {
+            const emailRegex = /^\w+([.-]?\w+)*\+?\w*@\w+([.-]?\w+)*(\.\w{2,6})+$/;
+            let errorMessage = [];
+
+            if(conPassElm.value.length > 0) {
+                if (passElm.value !== conPassElm.value) {
+                    errorMessage.push("Password and Confirm Password do not match.");
+                }
+            } else {
+                errorMessage.push("Confirm Password is required.");
+            }
+
+            if (errorMessage.length === 0) {
+                return {
+                    target: conPassElm,
+                    isValid: true,
+                    errors: null
+                }
+            }
+
+            return {
+                target: conPassElm,
+                isValid: false,
+                errors: errorMessage
+            }
+        }
+
+        // Define Form validation function
+        function validateForm () {
+            let nameInput = document.getElementById("name");
+            let emailInput = document.getElementById("email");
+            let passwordInput = document.getElementById("password");
+            let confirmPasswordInput = document.getElementById("confirmPassword");
+
+            // const nameRegex = /^[a-zA-Z\s]+$/;
+            // const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,6})+$/;
+            // const emailRegex = /^\w+([.-]?\w+)*\+?\w*@\w+([.-]?\w+)*(\.\w{2,6})+$/;
+
+            let hasError = false;
+
+            // Validate Name Field
+            let nameValidation = validateName(nameInput);
+            if (!nameValidation.isValid) { hasError = true }
+            validationFeedback(nameValidation);
+
+            // Validate Email Field
+            let emailValidation = validateEmail(emailInput);
+            if (!emailValidation.isValid) { hasError = true }
+            validationFeedback(emailValidation);
+
+            // Validate Password Field
+            let passwordValidation = validatePassword(passwordInput);
+            if (!passwordValidation.isValid) { hasError = true }
+            validationFeedback(passwordValidation);
+
+            // Validate Confirm Password Field
+            let confirmPasswordValidation = validateConfirmPassword(passwordInput, confirmPasswordInput);
+            if (!confirmPasswordValidation.isValid) { hasError = true }
+            validationFeedback(confirmPasswordValidation);
+
+            return !hasError;
+
+        }
+
+        // Validate inputs when typed
+        let inputList = document.getElementsByClassName("validate");
+        for (let inputItem of inputList) {
+            inputItem.addEventListener("input", function (e) {
+                // console.log("typing...", inputItem);
+                let inputName = inputItem.getAttribute("name");
+                switch (inputName) {
+                    case "name":
+                        let nameValidation = validateName(inputItem);
+                        validationFeedback(nameValidation);
+                        break;
+                    case "email":
+                        let emailValidation = validateEmail(inputItem);
+                        validationFeedback(emailValidation);
+                        break;
+                    case "password":
+                        let passwordValidation = validatePassword(inputItem);
+                        validationFeedback(passwordValidation);
+                        break;
+                    case "confirmPassword":
+                        let passElm = document.querySelector("[name=password]")
+                        let confirmPasswordValidation = validateConfirmPassword(passElm, inputItem);
+                        validationFeedback(confirmPasswordValidation);
+                        break;
+                }
+            });
+        }
+
+        // validate form when submited
+        document.getElementById("form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            if(validateForm()) {
+                alert("Form Submitted!");
+            }
+        })
+
+
+    </script>
+</body>
+</html>
